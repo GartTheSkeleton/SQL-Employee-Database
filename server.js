@@ -33,6 +33,119 @@ const mainMenuQuestions = [
   }
 ]
 
+const addDepartmentQuestions = [
+  {
+    type: 'input',
+    name: 'department_name',
+    message: "Enter new Department Name",
+    validate: first_name => {
+      if (first_name) {
+        return true;
+      } else {
+        console.log("Please enter Department Name!");
+        return false;
+      }
+    }
+  }
+]
+
+const addRoleQuestions = [
+  {
+    type: 'input',
+    name: 'role_name',
+    message: "Enter new Role Name",
+    validate: role_name => {
+      if (role_name) {
+        return true;
+      } else {
+        console.log("Please enter Role Name!");
+        return false;
+      }
+    }
+  },
+  {
+    type: 'number',
+    name: 'salary',
+    message: "Enter new Role's Salary",
+    validate: role_name => {
+      if (role_name) {
+        return true;
+      } else {
+        console.log("Please enter Salary!");
+        return false;
+      }
+    }
+  },
+  {
+    type: 'number',
+    name: 'department_id',
+    message: "Enter new Role's Department ID",
+    validate: role_name => {
+      if (role_name) {
+        return true;
+      } else {
+        console.log("Please enter Department ID!");
+        return false;
+      }
+    }
+  }
+]
+
+const addEmployeeQuestions = [
+  {
+    type: 'input',
+    name: 'first_name',
+    message: "Enter Employee's First Name",
+    validate: first_name => {
+      if (first_name) {
+        return true;
+      } else {
+        console.log("Please enter Employee's First Name!");
+        return false;
+      }
+    }
+  },
+  {
+    type: 'input',
+    name: 'last_name',
+    message: "Enter Employee's Last Name",
+    validate: last_name => {
+      if (last_name) {
+        return true;
+      } else {
+        console.log("Please enter Employee's Last Name!");
+        return false;
+      }
+    }
+  },
+  {
+    type: 'input',
+    name: 'role',
+    message: "Enter Employee's Role",
+    validate: role => {
+      if (role) {
+        return true;
+      } else {
+        console.log("Please enter Employee's Role!");
+        return false;
+      }
+    }
+  },
+  {
+    type: 'number',
+    name: 'manager_id',
+    message: "Enter Employee's Manager ID Number",
+    validate: role => {
+      if (role) {
+        return true;
+      } else {
+        console.log("Please enter Employee's Manager ID Number!");
+        return false;
+      }
+    }
+  }
+]
+
 let coolFunc = function(){
   inquirer.prompt(mainMenuQuestions).then(inquirerResponses => {
     console.log(inquirerResponses.menu);
@@ -76,9 +189,6 @@ let coolFunc = function(){
 };
 
 
-//axios passing answers to post requests
-
-//display relevant table
 
 coolFunc();
 

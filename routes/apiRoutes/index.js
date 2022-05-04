@@ -18,6 +18,7 @@ router.get('/departments', (req, res) => {
     });
   });
 
+  //add new department
 router.post('/departments', ({ body }, res) => {
     const sql = `INSERT INTO department (department_name)
   VALUES (?)`;
@@ -51,6 +52,7 @@ router.get('/roles', (req, res) => {
     });
 });
 
+//add a role
 router.post('/roles', ({ body }, res) => {
     const sql = `INSERT INTO roles (title, salary, department_id)
   VALUES (?, ?, ?)`;
@@ -83,5 +85,23 @@ router.get('/employee', (req, res) => {
         });
     });
 });
+
+//add an employee
+router.post('/employee', ({ body }, res) => {
+    const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id)
+    VALUES (?, ?, ?, ?)`;
+    const params = [body.first_name, body.last_name, body.role_id, body.manager_id];
+
+    db.query(sql, params, (err, rows) => {
+        if (err) {
+            res.status(400).json({ error: err.message });
+            return;
+        }
+        res.json ({
+            message: 'success',
+            data: body
+        });
+    });
+})
 
 module.exports = router;

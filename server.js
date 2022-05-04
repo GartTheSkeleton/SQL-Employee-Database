@@ -36,22 +36,34 @@ const mainMenuQuestions = [
 let coolFunc = function(){
   inquirer.prompt(mainMenuQuestions).then(inquirerResponses => {
     console.log(inquirerResponses.menu);
-    let switchAnswer = inquirerResponses.switch
+    let switchAnswer = inquirerResponses.menu
     switch (switchAnswer) {
       case "View Employees":
-          //view employees
+        axios.get('http://localhost:3001/api/employee').then(function (response) {
+          // handle success
+          console.table(response.data.data);
+          coolFunc();
+        })
           break;
       case "View Departments":
-          //view departments
+        axios.get('http://localhost:3001/api/departments').then(function (response) {
+          // handle success
+          console.table(response.data.data);
+          coolFunc();
+        })
           break;
       case "View Roles":
-          //view roles
+        axios.get('http://localhost:3001/api/roles').then(function (response) {
+          // handle success
+          console.table(response.data.data);
+          coolFunc();
+        })
           break;
       case "Add Employee":
-          //"Add Employee"
+        
           break;
       case "Add Department":
-          //"Add Department"
+        
           break;
       case "Add Role":
           //"Add Role"
@@ -68,19 +80,10 @@ let coolFunc = function(){
 
 //display relevant table
 
-//coolFunc();
+coolFunc();
 
-axios.get('http://localhost:3001/api/departments').then(function (response) {
-  // handle success
-  console.table(response.data.data);
-})
+// axios.post('http://localhost:3001/api/departments', {
+//   department_name: 'Oversight'
+// })
 
-axios.get('http://localhost:3001/api/employee').then(function (response) {
-  // handle success
-  console.table(response.data.data);
-})
 
-axios.get('http://localhost:3001/api/roles').then(function (response) {
-  // handle success
-  console.table(response.data.data);
-})

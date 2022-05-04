@@ -2,6 +2,7 @@ const express = require('express');
 const db = require('./db/connection');
 const apiRoutes = require('./routes/apiRoutes');
 const inquirer = require('inquirer');
+const http = require('node:http');
 const axios = require('axios');
 
 const PORT = process.env.PORT || 3001;
@@ -67,4 +68,19 @@ let coolFunc = function(){
 
 //display relevant table
 
-coolFunc();
+//coolFunc();
+
+axios.get('http://localhost:3001/api/departments').then(function (response) {
+  // handle success
+  console.table(response.data.data);
+})
+
+axios.get('http://localhost:3001/api/employee').then(function (response) {
+  // handle success
+  console.table(response.data.data);
+})
+
+axios.get('http://localhost:3001/api/roles').then(function (response) {
+  // handle success
+  console.table(response.data.data);
+})

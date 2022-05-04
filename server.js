@@ -173,7 +173,20 @@ let coolFunc = function(){
         })
           break;
       case "Add Employee":
-        
+        inquirer.prompt(addEmployeeQuestions).then(inquirerResponses => {
+          let myfirst_name = inquirerResponses.first_name
+          let mylast_name = inquirerResponses.last_name
+          let myrole = inquirerResponses.role
+          let mymanager = inquirerResponses.manager_id
+          axios.post('http://localhost:3001/api/employee', {
+            first_name: `${myfirst_name}`,
+            last_name: `${mylast_name}`,
+            role_id: `${myrole}`,
+            manager_id: `${mymanager}`
+          })
+          console.log(`${myfirst_name} added to Database.`)
+          coolFunc();
+        });
           break;
       case "Add Department":
         

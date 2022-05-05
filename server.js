@@ -135,11 +135,39 @@ const addEmployeeQuestions = [
     type: 'number',
     name: 'manager_id',
     message: "Enter Employee's Manager ID Number",
-    validate: role => {
-      if (role) {
+    validate: manager_id => {
+      if (manager_id) {
         return true;
       } else {
         console.log("Please enter Employee's Manager ID Number!");
+        return false;
+      }
+    }
+  }
+]
+const updateEmployeeQuestions = [
+  {
+    type: 'number',
+    name: 'employee_id',
+    message: "Enter ID number of Employee",
+    validate: employee_id => {
+      if (employee_id) {
+        return true;
+      } else {
+        console.log("Please enter ID number of Employee!");
+        return false;
+      }
+    }
+  },
+  {
+    type: 'number',
+    name: 'role_id',
+    message: "Enter Desired Role ID",
+    validate: role_id => {
+      if (role_id) {
+        return true;
+      } else {
+        console.log("Please enter ID of new Role!");
         return false;
       }
     }
@@ -183,19 +211,45 @@ let coolFunc = function(){
             last_name: `${mylast_name}`,
             role_id: `${myrole}`,
             manager_id: `${mymanager}`
-          })
-          console.log(`${myfirst_name} added to Database.`)
+          });
+          console.log(`${myfirst_name} added to Database.`);
           coolFunc();
         });
           break;
       case "Add Department":
-        
+        inquirer.prompt(addDepartmentQuestions).then(inquirerResponses => {
+          let mydepartment_name = inquirerResponses.department_name
+          axios.post('http://localhost:3001/api/departments', {
+            department_name: `${mydepartment_name}`
+          });
+          console.log(`${mydepartment_name} added to Database.`);
+          coolFunc();
+        });
           break;
       case "Add Role":
-          //"Add Role"
+        inquirer.prompt(addRoleQuestions).then(inquirerResponses => {
+          let myrole_name = inquirerResponses.role_name;
+          let mysalary = inquirerResponses.salary;
+          let mydepartment_id = inquirerResponses.department_id;
+          axios.post('http://localhost:3001/api/roles', {
+            title: `${myrole_name}`,
+            salary: `${mysalary}`,
+            department_id: `${mydepartment_id}`
+          });
+          console.log(`${myrole_name} added to Database.`);
+          coolFunc();
+        })
           break;
       case "Update Role":
-        //Update role
+        inquirer.prompt(updateEmployeeQuestions).then(inquirerResponses => {
+          let myemployee_id = inquirerResponses.employee_id
+          let desired_role = inquirerResponses.role_id
+          axios.put(`http://localhost:3001/api/employee/${myemployee_id}`, {
+            role_id: `${desired_role}`
+          })
+          console.log(`Role Changed.`);
+          coolFunc();
+        })
         break;
   }
   })
